@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <h3>Edit Profile</h3>
+    <form action="/id/{{ id }}" method="POST">
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" name ="status" id="status" value="{{ user['status'] }}">
+                {% for i in statusOptions %}
+                <option> {{ statusOptions[i] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" name="fName" id="fName" value="{{ user['fName'] }}">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="lName">Last Name</label>
+            <input type="text" class="form-control" name="lName" id="lName" value="{{ user['lName'] }}">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ user['email'] }}">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" name="id" id="id" value="{{ id }}" readonly>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+    <br>
+    <form action="/delete/{{ id }}" method="POST">
+        <button type="submit" class="btn btn-danger" name="deleteID" value="{{ id }}" >Delete Profile</button>
+        <p class="font-weight-light">WARNING - This action cannot be undone.</p>
+    </form>
+    <br>
+</div>
+
+    
+{% endblock %}

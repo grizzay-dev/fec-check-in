@@ -23,7 +23,7 @@ def updateByID(id, user):
             json.dump(tmp, d, sort_keys=True, indent=4, separators=(',', ': '))
             d.close()
 
-def create_new(user):
+def createNew(user):
         with open(data_path, "r") as d:
             try:
                 tmp = json.load(d)
@@ -38,6 +38,17 @@ def create_new(user):
             d.close()
 
         with open(data_path, "r+") as d:
+            json.dump(tmp, d, sort_keys=True, indent=4, separators=(',', ': '))
+            d.close()
+
+def deleteUser(id):
+    with open(data_path, "r") as d:
+        tmp = json.load(d)
+        d.close()
+        del tmp[id]
+        print(tmp)
+
+    with open(data_path, "wt") as d:
             json.dump(tmp, d, sort_keys=True, indent=4, separators=(',', ': '))
             d.close()
 

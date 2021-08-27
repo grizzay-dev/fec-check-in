@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <h3>New Profile</h3>
+    <form action="/create" method="POST">
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" name ="status" id="status" placeholder="OUT">
+                {% for i in statusOptions %}
+                <option> {{ statusOptions[i] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" name="fName" id="fName" placeholder="Jane">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="lName">Last Name</label>
+            <input type="text" class="form-control" name="lName" id="lName" placeholder="Doe">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Jane.Doe@Email.com">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" name="id" id="id" value="-to be assigned-" readonly>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Create Profile</button>
+    </form>
+</div>
+
+    
+{% endblock %}
