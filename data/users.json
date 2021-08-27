@@ -1,4 +1,10 @@
 {
+    "0cca653b-2d77-4c48-99da-f9b2ff7b4b87": {
+        "email": "Jane.Doe@email.com",
+        "fName": "Jane",
+        "lName": "Doe",
+        "status": "OUT"
+    },
     "15b79700-6673-454c-9808-560ffc5dffdc": {
         "email": "anthony@email.com",
         "fName": "Anthony",
@@ -15,12 +21,6 @@
         "email": "byron@email.com",
         "fName": "Byron",
         "lName": "Laird",
-        "status": "IN"
-    },
-    "f684c885-ec9b-4f5d-b5ce-082979e49b5b": {
-        "email": "Jane.Doe@gmail.com",
-        "fName": "Jane",
-        "lName": "Doe",
         "status": "IN"
     }
 }

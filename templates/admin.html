@@ -3,12 +3,14 @@
 {% block content %}
 
     <h1>FEC Status Board</h1>
+    <br><a href="/create">Add new profile</a><br>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Status</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Edit</th>
             </tr> 
         </thead>
         <tbody>
@@ -17,6 +19,7 @@
                 <th scope="row">{{ users[key].status }}</td>
                 <td>{{ users[key].fName }} {{ users[key].lName }}</td>
                 <td><a href="mailto: {{ users[key].email }}">{{ users[key].email }}</a></td>
+                <td><a href="/id/{{ key }}">Edit</a></td>
             </tr>
             {% endfor %}
         </tbody>

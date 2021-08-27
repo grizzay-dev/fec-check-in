@@ -33,7 +33,6 @@ def getUsers():
 @app.route('/')
 def root():
     data = getUsers()
-
     return render_template("status.html", title="STATUS BOARD", users=data)
 
 #CREATE PROFILE - Create new profile
@@ -66,11 +65,18 @@ def profile(id):
         user.updateByID(id, userUpdate)
         return redirect("/")
 
+#DELETE PROFILE - Permenantly remove profile
 @app.route("/delete/<id>", methods=['POST'])
 def delete(id):
     if request.method=='POST':
         user.deleteUser(id)
         return redirect("/")
+
+#READ ONLY
+@app.route("/admin")
+def readonly():
+    data = getUsers()
+    return render_template("admin.html", title="STATUS BOARD", users=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
