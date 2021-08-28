@@ -10,8 +10,7 @@ STATUS = {
     0: 'OUT',
     1: 'IN',
     2: 'WFH',
-    3: 'ON LEAVE',
-    4: "IN - LUNCH"
+    3: 'ON LEAVE'
 }
 
 def updateByID(id, user):

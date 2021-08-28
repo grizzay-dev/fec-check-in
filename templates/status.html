@@ -3,18 +3,30 @@
 {% block content %}
 
     <h1>FEC Status Board</h1>
+    <br>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Status</th>
+                <th>Comment</th>
                 <th>Name</th>
                 <th>Email</th>
             </tr> 
         </thead>
         <tbody>
             {% for key in users.keys() %}
-            <tr>
+            <tr 
+            {% if users[key].status == "OUT" %}
+             class="table-warning"
+             {% elif users[key].status == "IN" %}
+             class="table-success"
+             {% elif users[key].status == "ON LEAVE" %}
+             class="table-danger"
+             {% elif users[key].status == "WFH" %}
+             class="table-primary"
+             {% endif %}>
                 <th scope="row">{{ users[key].status }}</td>
+                <td>{% if users[key].comment %} ({{ users[key].comment }}) {% endif %}</td>
                 <td>{{ users[key].fName }} {{ users[key].lName }}</td>
                 <td><a href="mailto: {{ users[key].email }}">{{ users[key].email }}</a></td>
             </tr>
