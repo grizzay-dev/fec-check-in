@@ -2,6 +2,7 @@ from os import linesep
 import uuid
 import os.path
 import json
+from datetime import datetime, tzinfo
 
 image_path = r"images/users/"
 data_path = r"data/users.json"
@@ -12,6 +13,11 @@ STATUS = {
     2: 'WFH',
     3: 'ON LEAVE'
 }
+
+def getTimeStamp():
+    now = datetime.now()
+    nowstr = now.strftime
+    return now.strftime("%d/%m/%Y, %H:%M:%S")
 
 def updateByID(id, user):
     with open(data_path, "r") as d:
@@ -34,6 +40,7 @@ def createNew(user):
                 "fName": user.fName,
                 'lName': user.lName,
                 'email': user.email,
+                'lastmod': user.lastmod
             }
             d.close()
 
@@ -60,6 +67,8 @@ class User:
         self.fName  = fName
         self.lName  = lName
         self.email  = email
+        self.lastmod = getTimeStamp()
+
 
     def convertToJSON(self):
         user = {
@@ -68,6 +77,8 @@ class User:
                 "fName": self.fName,
                 'lName': self.lName,
                 'email': self.email,
+                'lastmod': self.lastmod
             }
         }
         return user
+

@@ -1,9 +1,10 @@
-from re import template
+#from re import template
 from flask import Flask, request, redirect, render_template
 from waitress import serve
 from werkzeug.utils import redirect
 import json
 import user as user
+import datetime
 
 #STATIC VARS
 DATA_PATH = r"data/users.json"
@@ -58,7 +59,8 @@ def profile(id):
                 "fName": req['fName'],
                 'lName': req['lName'],
                 'email': req['email'],
-                'comment': req['comment']
+                'comment': req['comment'],
+                'lastmod': user.getTimeStamp()
             }
         user.updateByID(id, userUpdate)
         return redirect("/")
@@ -82,6 +84,7 @@ def updateStatusGet(id):
         profile = getUserData(id)
         profile['status'] = user.STATUS[int(req['status'])]
         profile['comment'] = req['comment']
+        profile['lastmod'] = user.getTimeStamp()
         user.updateByID(id, profile)
         return redirect("/")
     
@@ -95,8 +98,8 @@ def readonly():
 ###                                   END - ROUTES                                     ###
 ###------------------------------------------------------------------------------------###
 
-#if __name__ == '__main__':
-    #serve(app, host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+    serve(app, host='0.0.0.0', port=8080)
     #app.run(debug=True)
 
 

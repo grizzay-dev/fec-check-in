@@ -1,37 +1,42 @@
 {
-    "0cca653b-2d77-4c48-99da-f9b2ff7b4b87": {
-        "comment": "lunch, return 1",
-        "email": "Jane.Doe@email.com",
-        "fName": "Jane",
-        "lName": "Doe",
-        "status": "OUT"
-    },
     "15b79700-6673-454c-9808-560ffc5dffdc": {
-        "comment": "",
+        "comment": "air con guy coming",
         "email": "anthony@email.com",
         "fName": "Anthony",
         "lName": "Nguyen",
+        "lastmod": "29/08/2021, 11:16:42",
         "status": "WFH"
     },
     "36a5c4d6-49b7-481b-a3d4-e3b82e3f8785": {
-        "comment": "",
+        "comment": "picking up mail",
         "email": "harry.davis3003@gmail.com",
         "fName": "Harry",
         "lName": "Davis",
-        "status": "ON LEAVE"
+        "lastmod": "29/08/2021, 11:19:35",
+        "status": "WFH"
     },
     "61198ac6-bb87-46dd-9c2d-7ae3659186cf": {
         "comment": "",
         "email": "byron@email.com",
         "fName": "Byron",
         "lName": "Laird",
-        "status": "IN"
+        "lastmod": "29/08/2021, 11:15:55",
+        "status": "WFH"
     },
     "c96e3574-3102-4433-9893-833c2c3b9c17": {
-        "comment": "gaming",
+        "comment": "nerd",
         "email": "Sean.Laird@gmail.com",
         "fName": "Sean",
         "lName": "Laird",
-        "status": "WFH"
+        "lastmod": "29/08/2021, 11:16:06",
+        "status": "ON LEAVE"
+    },
+    "e10e4823-9822-4f01-ab47-5ae20f4e5492": {
+        "comment": "1",
+        "email": "k.quan@gmail.com",
+        "fName": "Kevin",
+        "lName": "Quan",
+        "lastmod": "29/08/2021, 11:11:27",
+        "status": "IN"
     }
 }

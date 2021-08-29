@@ -11,6 +11,7 @@
                 <th>Comment</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Last Update</th>
             </tr> 
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                 <td>{% if users[key].comment %} ({{ users[key].comment }}) {% endif %}</td>
                 <td>{{ users[key].fName }} {{ users[key].lName }}</td>
                 <td><a href="mailto: {{ users[key].email }}">{{ users[key].email }}</a></td>
+                <td>{{ users[key].lastmod }}</td>
             </tr>
             {% endfor %}
         </tbody>
