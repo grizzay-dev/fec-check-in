@@ -33,6 +33,11 @@ def root():
     data = getUsers()
     return render_template("status.html", title="STATUS BOARD", users=data)
 
+@app.route('/new')
+def newroot():
+    data = getUsers()
+    return render_template("status-new.html", title="STATUS BOARD", users=data)
+
 #CREATE PROFILE - Create new profile
 @app.route("/create", methods=['POST', 'GET'])
 def createProfile():
@@ -94,13 +99,14 @@ def readonly():
     data = getUsers()
     return render_template("admin.html", title="STATUS BOARD", users=data)
 
+
 ###------------------------------------------------------------------------------------###
 ###                                   END - ROUTES                                     ###
 ###------------------------------------------------------------------------------------###
 
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=8080)
-    #app.run(debug=True)
+    #serve(app, host='0.0.0.0', port=8080)
+    app.run(debug=True)
 
 
 
