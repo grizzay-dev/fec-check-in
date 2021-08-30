@@ -1,20 +1,25 @@
 #from re import template
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, url_for
 from flask.scaffold import F
 from flask.wrappers import Response
 from waitress import serve
 from werkzeug.utils import redirect
 import json
 import user as user
+from werkzeug.utils import secure_filename
+import os
 
 
 MAX_LOG_DISPLAY_LEN = 51
 
 #STATIC VARS
 DATA_PATH = r"data/users.json"
+UPLOAD_FOLDER = r'static/images/users'
+ALLOWED_EXTENSIONS = {'png'}
 
 #WEB SERVER
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #HELPER METHODS
 def getUserData(id):
@@ -27,6 +32,10 @@ def getUsers():
     with open(DATA_PATH, 'r') as data:
         tmp = json.load(data)
         return tmp
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 ###------------------------------------------------------------------------------------###
 ###                                   ROUTES                                           ###
@@ -72,6 +81,12 @@ def profile(id):
                 'lastmod': user.getTimeStamp()
             }
         user.updateByID(id, userUpdate)
+        if 'profilePicture' in request.files:
+            file = request.files['profilePicture']
+            if file and allowed_file(file.filename ):
+                fn = id + ".png"
+                fn = secure_filename(fn)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))        
         return redirect("/")
 
 #DELETE PROFILE - Permenantly remove profile
@@ -114,7 +129,6 @@ def logs():
         logLen = MAX_LOG_DISPLAY_LEN
 
     return render_template("logs.html", title="AUDIT LOGS", logs=logs, logLen = logLen)
-
 
 
 ###------------------------------------------------------------------------------------###

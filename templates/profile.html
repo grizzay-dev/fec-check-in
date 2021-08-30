@@ -4,7 +4,7 @@
 <div class="container">
     <br>
     <h3>Edit Profile</h3>
-    <form action="/id/{{ id }}" method="POST">
+    <form action="/id/{{ id }}" method="POST" enctype = "multipart/form-data">
         <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" name ="status" id="status" value="{{ user['status'] }}">
@@ -37,6 +37,11 @@
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" name="id" id="id" value="{{ id }}" readonly>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="profilePicture">Profile picture (.PNG, 200x200px).</label> <br>
+            <input type="file" class="form-control-file" id="profilePicture" name="profilePicture">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Update Profile</button>

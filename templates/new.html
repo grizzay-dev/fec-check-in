@@ -4,7 +4,7 @@
 <div class="container">
     <br>
     <h3>New Profile</h3>
-    <form action="/create" method="POST">
+    <form action="/create" method="POST" enctype = "multipart/form-data">
         <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" name ="status" id="status" placeholder="OUT">
@@ -32,6 +32,11 @@
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" name="id" id="id" value="-to be assigned-" readonly>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="profilePicture">Profile picture (.PNG, 200x200px).</label> <br>
+            <input type="file" class="form-control-file" id="profilePicture" name="profilePicture">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Create Profile</button>

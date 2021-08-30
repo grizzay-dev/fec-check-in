@@ -1,11 +1,11 @@
 {
     "15b79700-6673-454c-9808-560ffc5dffdc": {
-        "comment": "a",
+        "comment": "haha",
         "email": "anthony@email.com",
         "fName": "Anthony",
         "lName": "Nguyen",
-        "lastmod": "30/08/2021, 16:51:24",
-        "status": "IN"
+        "lastmod": "30/08/2021, 19:30:42",
+        "status": "WFH"
     },
     "24521666-43f5-47e9-a0b0-42ee601fd387": {
         "email": "Test@gmail",
@@ -30,13 +30,6 @@
         "lastmod": "30/08/2021, 11:48:24",
         "status": "OUT"
     },
-    "6ab05850-0e6d-4b8b-b9c0-417ba2b94cf5": {
-        "email": "Test@gmail",
-        "fName": "Test 1",
-        "lName": "Test",
-        "lastmod": "30/08/2021, 17:17:52",
-        "status": "OUT"
-    },
     "9281600a-57f1-4e30-b882-f32f8957891d": {
         "email": "Test@gmail",
         "fName": "Test 1",
@@ -52,10 +45,11 @@
         "status": "OUT"
     },
     "a6f41db1-11a4-40ce-b99d-25ac7826b016": {
+        "comment": "a",
         "email": "Test@gmail",
         "fName": "Test 1",
         "lName": "Test",
-        "lastmod": "30/08/2021, 17:17:43",
+        "lastmod": "30/08/2021, 18:28:11",
         "status": "OUT"
     },
     "be86ce61-1039-49e9-94b3-3d6c2c09cc84": {
