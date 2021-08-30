@@ -1,8 +1,21 @@
+from logging.handlers import RotatingFileHandler
 from os import linesep
 import uuid
 import os.path
 import json
 from datetime import datetime, tzinfo
+import logging
+
+#LOGGING
+logger = logging.getLogger("audit_log")
+logger.setLevel(logging.WARNING)
+
+ah = RotatingFileHandler("data/audit.log", maxBytes=20, backupCount=5)
+ah = logging.FileHandler("data/audit.log")
+ah.setLevel(logging.WARNING)
+
+logger.addHandler(ah)
+MAX_LOG_DISPLAY_LEN = 51
 
 image_path = r"images/users/"
 data_path = r"data/users.json"
@@ -24,6 +37,7 @@ def updateByID(id, user):
         tmp = json.load(d)
         tmp[id] = user
         d.close()
+        logger.warning("UPDATED PROFILE: {0}".format(json.dumps(tmp[id])))
 
     with open(data_path, "wt") as d:
             json.dump(tmp, d, sort_keys=True, indent=4, separators=(',', ': '))
@@ -42,6 +56,7 @@ def createNew(user):
                 'email': user.email,
                 'lastmod': user.lastmod
             }
+            logger.warning("CREATED PROFILE: {0}".format(json.dumps(tmp[str(user.id)])))
             d.close()
 
         with open(data_path, "r+") as d:
@@ -52,6 +67,7 @@ def deleteUser(id):
     with open(data_path, "r") as d:
         tmp = json.load(d)
         d.close()
+        logger.warning("DELETED PROFILE: {0}".format(json.dumps(tmp[id])))
         del tmp[id]
         print(tmp)
 

@@ -1,10 +1,14 @@
 #from re import template
 from flask import Flask, request, redirect, render_template
+from flask.scaffold import F
+from flask.wrappers import Response
 from waitress import serve
 from werkzeug.utils import redirect
 import json
 import user as user
-import datetime
+
+
+MAX_LOG_DISPLAY_LEN = 51
 
 #STATIC VARS
 DATA_PATH = r"data/users.json"
@@ -33,10 +37,10 @@ def root():
     data = getUsers()
     return render_template("status.html", title="STATUS BOARD", users=data)
 
-@app.route('/new')
+@app.route('/old')
 def newroot():
     data = getUsers()
-    return render_template("status-new.html", title="STATUS BOARD", users=data)
+    return render_template("status-old.html", title="STATUS BOARD", users=data)
 
 #CREATE PROFILE - Create new profile
 @app.route("/create", methods=['POST', 'GET'])
@@ -99,6 +103,19 @@ def readonly():
     data = getUsers()
     return render_template("admin.html", title="STATUS BOARD", users=data)
 
+#LOG FILE
+@app.route("/admin/logs")
+def logs():
+    with open("data/audit.log", "r") as l:
+        logs = l.readlines()
+    
+    logLen  = len(logs)
+    if(logLen > MAX_LOG_DISPLAY_LEN):
+        logLen = MAX_LOG_DISPLAY_LEN
+
+    return render_template("logs.html", title="AUDIT LOGS", logs=logs, logLen = logLen)
+
+
 
 ###------------------------------------------------------------------------------------###
 ###                                   END - ROUTES                                     ###
@@ -107,7 +124,7 @@ def readonly():
 if __name__ == '__main__':
     #serve(app, host='0.0.0.0', port=8080)
     app.run(debug=True)
-
+    
 
 
 
