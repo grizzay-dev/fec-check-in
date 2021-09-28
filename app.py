@@ -7,6 +7,7 @@ from werkzeug.utils import redirect
 import json
 import user as user
 from werkzeug.utils import secure_filename
+from urllib.parse import urlparse
 import os
 
 
@@ -66,15 +67,17 @@ def createProfile():
 @app.route('/id/<id>', methods=['POST', 'GET'])
 def profile(id):
     if request.method=='GET':
+        u = urlparse(request.base_url)
         profile = getUserData(id)
         profileTitle = "Profile  - {0} {1}".format(profile['fName'], profile['lName'])
-        return render_template("profile.html", title=profileTitle, user=profile, id = id, statusOptions=user.STATUS)
+        return render_template("profile.html", title=profileTitle, user=profile, id = id, statusOptions=user.STATUS, hostname = u.hostname)
     
     elif request.method=='POST':
         req = request.form
         userUpdate = {
                 'status': req['status'],
                 "fName": req['fName'],
+                
                 'lName': req['lName'],
                 'email': req['email'],
                 'comment': req['comment'],
@@ -136,8 +139,7 @@ def logs():
 ###------------------------------------------------------------------------------------###
 
 if __name__ == '__main__':
-    #serve(app, host='0.0.0.0', port=8080)
-    app.run(port=80)
+    serve(app, host='0.0.0.0', port=80)
     
 
 
