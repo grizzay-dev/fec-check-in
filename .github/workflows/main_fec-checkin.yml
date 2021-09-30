@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'fec-checkin'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2D0A2DA7EBD04EABA932458A2BCF10FC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_336DFFA40518426AA5B3B9330D22CFB4 }}
