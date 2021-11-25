@@ -8,14 +8,20 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Details</th>
+                    <th>Timestamp</th>
+                    <th>Change</th>
+                    <th>Previous</th>
+                    <th>New</th>
                 </tr> 
             </thead>
             <tbody>
-                {% for i in range(0, logLen) %}
+                {% for row in logs %}
                 <tr>
-                    <th scope="row">{{ i + 1 }}</td>
-                    <td>{{ logs[logLen-1-i]  }}</td>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

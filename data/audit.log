@@ -55,3 +55,15 @@ UPDATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Test3", "email": 
 UPDATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Test3", "email": "harry.test@gmail.com", "comment": "-", "lastmod": "24/11/2021, 18:16:34"}
 UPDATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Test3", "email": "harry.test@gmail.com", "comment": "-", "lastmod": "24/11/2021, 18:17:05"}
 UPDATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Test5", "email": "harry.test@gmail.com", "comment": "-", "lastmod": "24/11/2021, 18:17:15"}
+CREATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Davis", "email": "harry.davis3003@gmail.com", "lastmod": "25/11/2021, 11:32:04"}
+UPDATED PROFILE: {"status": "OUT", "fName": "Harry", "lName": "Davis", "email": "harry.davis3003@gmail.com", "comment": "test", "lastmod": "25/11/2021, 11:39:36"}
+UPDATED PROFILE: {'status': 'IN', 'fName': 'Tien', 'lName': 'Truong', 'email': 'Tien.Truong@gmail.com', 'comment': 'new user', 'lastmod': '25/11/2021, 12:12:29'}
+DELETED PROFILE: ('26edcc73-9409-403d-a861-4be2ab53f72e', 'harry.davis3003@gmail.com', 'Harry', 'Davis', '25/11/2021, 11:39:36', 'OUT', 'test')
+CREATED PROFILE: <user.User object at 0x0000028B2F88FB80>
+DELETED PROFILE: ('8b90d893-a4ea-4db7-9525-34ddeb748582', 'mai@gmail.com', 'Mai', 'Truong', '25/11/2021, 12:43:01', 'OUT', 'new user')
+DELETED PROFILE: ('71ffdb37-570c-4e55-bcfa-6588d026b772', 'harry.test@gmail.com', 'Harry', 'Test5', '24/11/2021, 18:17:15', 'OUT', '-')
+CREATED PROFILE: <user.User object at 0x00000183B3AF36D0>
+DELETED PROFILE: ('b28320f7-2340-4d60-9fec-3502f766d4c5', 'mai@email.com', 'Mai-Tien', 'Truong', '25/11/2021, 12:58:55', 'OUT', 'new user')
+UPDATED PROFILE: {'status': 'OUT', 'fName': 'Bob', 'lName': 'Brander', 'email': 'brander@email.com', 'comment': 'change name', 'lastmod': '25/11/2021, 13:08:23'}
+UPDATED PROFILE: {'status': 'OUT', 'fName': 'Bob', 'lName': 'Brander', 'email': 'brander@email.com', 'comment': 'hi', 'lastmod': '25/11/2021, 13:11:21'}
+UPDATED PROFILE: {'status': 'OUT', 'fName': 'Bob', 'lName': 'Brander', 'email': 'brander@email.com', 'comment': 'checking old vs new', 'lastmod': '25/11/2021, 13:14:17'}

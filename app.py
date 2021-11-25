@@ -28,12 +28,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #HELPER METHODS
-def getUserData(id):
-    with open(DATA_PATH, 'r') as data:
-        tmp = json.load(data)
-        user = tmp[id]
-        return user
-#for db
+#Get single user by id
 def get_user(id, db):
     conn = None
     try:
@@ -48,17 +43,10 @@ def get_user(id, db):
 
     finally:
         if conn:
-            print(rows)
             conn.close()
-            return rows
-            
+            return rows[0]
 
-def getUsers():
-    with open(DATA_PATH, 'r') as data:
-        tmp = json.load(data)
-        return tmp
-
-#for db
+#Get all users in db
 def get_all_users(db):
     conn = None
     try:
@@ -77,6 +65,7 @@ def get_all_users(db):
             conn.close()
             return rows
 
+#Checks for allowed file types for profile pictures
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -87,15 +76,8 @@ def allowed_file(filename):
 #ROOT - Status Board.
 @app.route('/')
 def root():
-    data = getUsers()
-    data_db = get_all_users(DB_PATH)
-
+    data = get_all_users(DB_PATH)
     return render_template("status.html", title="STATUS BOARD", users=data)
-
-@app.route('/old')
-def newroot():
-    data = getUsers()
-    return render_template("status-old.html", title="STATUS BOARD", users=data)
 
 #CREATE PROFILE - Create new profile
 @app.route("/create", methods=['POST', 'GET'])
@@ -104,9 +86,8 @@ def createProfile():
         return render_template("new.html", statusOptions=user.STATUS)
     if request.method == "POST":
         req =request.form
-        newUser = user.User(req["fName"], req["lName"], req["email"])
-        user.createNew(newUser)
-        user.create_user(newUser, DB_PATH)
+        new_user = user.User(req["fName"], req["lName"], req["email"])
+        user.create_user(new_user, DB_PATH)
         return redirect("/")
 
 #USER PROFILE - View / edit user profiles.
@@ -114,10 +95,9 @@ def createProfile():
 def profile(id):
     if request.method=='GET':
         u = urlparse(request.base_url)
-        profile = getUserData(id)
         profile = get_user(id, DB_PATH)
-        profileTitle = "Profile  - {0} {1}".format(profile['fName'], profile['lName'])
-        return render_template("profile.html", title=profileTitle, user=profile, id = id, statusOptions=user.STATUS, hostname = u.hostname)
+        profileTitle = "Profile  - {0} {1}".format(profile[2], profile[3])
+        return render_template("profile.html", title=profileTitle, user=profile, id = profile[0], statusOptions=user.STATUS, hostname = u.hostname)
     
     elif request.method=='POST':
         req = request.form
@@ -127,9 +107,9 @@ def profile(id):
                 'lName': req['lName'],
                 'email': req['email'],
                 'comment': req['comment'],
-                'lastmod': user.getTimeStamp()
+                'lastmod': user.get_time_stamp()
             }
-        user.updateByID(id, userUpdate)
+
         user.update_user(id, userUpdate, DB_PATH)
         if 'profilePicture' in request.files:
             file = request.files['profilePicture']
@@ -143,7 +123,6 @@ def profile(id):
 @app.route("/delete/<id>", methods=['POST'])
 def delete(id):
     if request.method=='POST':
-        user.deleteUser(id)
         user.delete_user(id, DB_PATH)
         return redirect("/")
 
@@ -151,36 +130,38 @@ def delete(id):
 @app.route("/update-status/<id>", methods=['GET', 'POST'])
 def updateStatusGet(id):
     if request.method == 'GET':
-        profile = getUserData(id)
+        profile = get_user(id, DB_PATH)
         return render_template("update-status.html", title="Update Status", id=id, user=profile, statusOptions=user.STATUS)
     
     elif request.method == 'POST':
         req = request.form
-        profile = getUserData(id)
-        profile['status'] = user.STATUS[int(req['status'])]
-        profile['comment'] = req['comment']
-        profile['lastmod'] = user.getTimeStamp()
-        user.updateByID(id, profile)
-        user.update_user(id, user, DATA_PATH)
+        profile = get_user(id, DB_PATH)
+        profile = list(profile)
+        profile[5] = user.STATUS[int(req['status'])]
+        profile[6] = req['comment']
+        profile[4] = user.get_time_stamp()
+        user_update = {
+                'status': profile[5],
+                "fName": profile[2],
+                'lName': profile[3],
+                'email': profile[1],
+                'comment': profile[6],
+                'lastmod': user.get_time_stamp()
+            }
+        user.update_user(id, user_update, DB_PATH)
         return redirect("/")
     
 #READ ONLY
 @app.route("/admin")
 def readonly():
-    data = getUsers()
+    data = get_all_users(DB_PATH)
     return render_template("admin.html", title="STATUS BOARD", users=data)
 
 #LOG FILE
 @app.route("/admin/logs")
 def logs():
-    with open("data/audit.log", "r") as l:
-        logs = l.readlines()
-    
-    logLen  = len(logs)
-    if(logLen > MAX_LOG_DISPLAY_LEN):
-        logLen = MAX_LOG_DISPLAY_LEN
-
-    return render_template("logs.html", title="AUDIT LOGS", logs=logs, logLen = logLen)
+    logs  = user.get_logs(DB_PATH, MAX_LOG_DISPLAY_LEN)
+    return render_template("logs.html", title="AUDIT LOGS", logs=logs, logLen = len(logs))
 
 
 ###------------------------------------------------------------------------------------###
