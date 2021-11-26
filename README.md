@@ -21,7 +21,9 @@ This repository  is for the [FEC Check-in Board](https://github.com/grizzay-dev/
 
 ### Database & Static Folder
 #### Data: `data/data.db`
-User and audit log information is stored in data.db sqlite database (documenation: [SQLite](https://www.sqlite.org/docs.html)).
+User and audit log information is stored in data.db sqlite database (documenation: [SQLite](https://github.com/sqlitebrowser/sqlitebrowser/wiki)).
+
+Database file can be interacted with using [DB Browser for SQLite](https://sqlitebrowser.org/dl/)
 
 Create statements for required tables below:
 `user` table:
