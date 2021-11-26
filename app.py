@@ -16,7 +16,6 @@ import os
 MAX_LOG_DISPLAY_LEN = 51
 
 #STATIC VARS
-DATA_PATH = r"data/users.json"
 UPLOAD_FOLDER = r'static/images/users'
 ALLOWED_EXTENSIONS = {'png'}
 
@@ -85,7 +84,7 @@ def createProfile():
     if request.method == 'GET':
         return render_template("new.html", statusOptions=user.STATUS)
     if request.method == "POST":
-        req =request.form
+        req = request.form
         new_user = user.User(req["fName"], req["lName"], req["email"])
         user.create_user(new_user, DB_PATH)
         return redirect("/")
@@ -169,7 +168,7 @@ def logs():
 ###------------------------------------------------------------------------------------###
 
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=8000)
+    serve(app, host='0.0.0.0', port=80)
     
 
 

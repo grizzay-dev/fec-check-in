@@ -4,7 +4,6 @@ import uuid
 import os.path
 import json
 from datetime import datetime, tzinfo
-import logging
 import sqlite3
 from sqlite3 import Error
 
@@ -20,12 +19,13 @@ STATUS = {
     3: 'ON LEAVE'
 }
 
+#helper method to get formatted timestamp as string
 def get_time_stamp():
     now = datetime.now()
     nowstr = now.strftime
     return now.strftime("%d/%m/%Y, %H:%M:%S")
 
-#Update user by id - commit to db
+#Update user by id - table user
 def update_user(id, user, db):
     conn = None
     try:
@@ -47,7 +47,7 @@ def update_user(id, user, db):
         if conn:
             conn.close()
 
-#create new user - commit to db
+#create new user - table user
 def create_user(user, db):
     conn = None
     try:
@@ -67,7 +67,7 @@ def create_user(user, db):
         if conn:
             conn.close()
 
-#delete existing user - commit to db
+#delete existing user - table user
 def delete_user(id, db):
     conn = None
     try:
@@ -91,6 +91,7 @@ def delete_user(id, db):
         if conn:
             conn.close()
 
+#write log entry to db - table auditlog
 def write_log(db, change, prev, new):
     conn = None
     try:
@@ -109,6 +110,7 @@ def write_log(db, change, prev, new):
         if conn:
             conn.close()
 
+#get x number of logs - table auditlog
 def get_logs(db, count):
     conn = None
     try:
