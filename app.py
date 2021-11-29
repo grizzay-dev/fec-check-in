@@ -1,12 +1,8 @@
-import re
 import sqlite3
 from sqlite3 import Error
-from flask import Flask, request, redirect, render_template, url_for
-from flask.scaffold import F
-from flask.wrappers import Response
+from flask import Flask, request, redirect, render_template
 from waitress import serve
 from werkzeug.utils import redirect
-import json
 import user as user
 from werkzeug.utils import secure_filename
 from urllib.parse import urlparse
@@ -17,14 +13,16 @@ MAX_LOG_DISPLAY_LEN = 51
 
 #STATIC VARS
 UPLOAD_FOLDER = r'static/images/users'
-ALLOWED_EXTENSIONS = {'png'}
-
-#STATIC VARS2
 DB_PATH = r'data/data.db'
+ALLOWED_EXTENSIONS = {'png', 'jpg'}
 
 #WEB SERVER
 app = Flask(__name__)
+
+#In future can have these import from a config file in the app directory.
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DB_PATH'] = DB_PATH
+app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
 #HELPER METHODS
 #Get single user by id
@@ -60,7 +58,6 @@ def get_all_users(db):
 
     finally:
         if conn:
-            print(rows)
             conn.close()
             return rows
 

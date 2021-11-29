@@ -1,9 +1,5 @@
-#from logging.handlers import RotatingFileHandler
-from os import linesep, write
 import uuid
-import os.path
-import json
-from datetime import datetime, tzinfo
+from datetime import datetime
 import sqlite3
 from sqlite3 import Error
 
