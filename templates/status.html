@@ -4,34 +4,34 @@
     <h1>FEC Status Board</h1>
     <br>
     <div class="row">
-        {% for key in users.keys() %}
+        {% for user in users %}
             <div class="col-sm-2 px-1 py-1">
                 <div class="card">
                     <div class="text-center">
-                        <img class="card-img-top CattoBorderRadius py-2 px-2" src="/static/images/users/{{ key }}.png" style="max-height: 200px; max-width: 200px;" alt="Profile picture" onerror="if(this.src != '/static/images/users/default.png') this.src = '/static/images/users/default.png';">
+                        <img class="card-img-top CattoBorderRadius py-2 px-2" src="/static/images/users/{{ user[0] }}.png" style="max-height: 200px; max-width: 200px;" alt="Profile picture" onerror="if(this.src != '/static/images/users/default.png') this.src = '/static/images/users/default.png';">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title text-center">{{ users[key].fName }} {{ users[key].lName }}</h5>
-                        <p class="card-text text-center">{% if 'comment' in users[key] %} {{ users[key].comment }} {% else %} - {% endif %}</p>
+                        <h5 class="card-title text-center">{{ user[2] }} {{ user[3] }}</h5>
+                        <p class="card-text text-center">{{ user[6] }}</p>
                         <div
-                        {% if users[key].status == "OUT" %}
+                        {% if user[5] == "OUT" %}
                             class="alert alert-warning text-center"
-                            {% elif users[key].status == "IN" %}
+                            {% elif user[5] == "IN" %}
                             class="alert alert-success text-center"
-                            {% elif users[key].status == "ON LEAVE" %}
+                            {% elif user[5] == "ON LEAVE" %}
                             class="alert alert-danger text-center"
-                            {% elif users[key].status == "WFH" %}
+                            {% elif user[5] == "WFH" %}
                             class="alert alert-primary text-center"
                             {% endif %} role="alert">
-                            {{ users[key].status }}
+                            {{ user[5] }}
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated: {{ users[key].lastmod[0:17] }}</small>
+                            <small class="text-muted">Last updated: {{ user[4] }}</small>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
     </div>
     <p>
 {% endblock %}

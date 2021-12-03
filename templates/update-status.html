@@ -3,38 +3,38 @@
 {% block content %}
 
     <br>
-    <h3>Hi {{ user.fName }},</h3>
+    <h3>Hi {{ user[2] }},</h3>
     <p><br></p>
     <h5>
-        Current Status: {{ user.status }}
+        Current Status: {{ user[5] }}
     </h5>
     <p><br></p>
     <h5>
         Update your status below:<br>
     </h5>
     <p><br></p>
-    <form action="/update-status/{{ id }}" method="POST">
+    <form action="/update-status/{{ user[0] }}" method="POST">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="radiosStatus1" value="1" {% if user.status == "IN" %} checked {% endif %}>
+            <input class="form-check-input" type="radio" name="status" id="radiosStatus1" value="1" {% if user[5] == "IN" %} checked {% endif %}>
             <label class="form-check-label" for="inlineRadio1">IN</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="radiosStatus2" value="0" {% if user.status == "OUT" %} checked {% endif %}>
+            <input class="form-check-input" type="radio" name="status" id="radiosStatus2" value="0" {% if user[5] == "OUT" %} checked {% endif %}>
             <label class="form-check-label" for="inlineRadio0">OUT</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="radiosStatus3" value="2" {% if user.status == "WFH" %} checked {% endif %}>
+            <input class="form-check-input" type="radio" name="status" id="radiosStatus3" value="2" {% if user[5] == "WFH" %} checked {% endif %}>
             <label class="form-check-label" for="inlineRadio3">WFH</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="radiosStatus4" value="3" {% if user.status == "ON LEAVE" %} checked {% endif %}>
+            <input class="form-check-input" type="radio" name="status" id="radiosStatus4" value="3" {% if user[5] == "ON LEAVE" %} checked {% endif %}>
             <label class="form-check-label" for="inlineRadio4">ON LEAVE</label>
           </div>
           <br>
           <br>
           <div class="form-group">
                 <label for="comment">Comment</label>
-                <input type="text" class="form-control" id="comment" name="comment" maxlength="25" placeholder="{{ user.comment }}">
+                <input type="text" class="form-control" id="comment" name="comment" maxlength="25" placeholder="{{ user[6] }}">
           </div>
           <br>
         <button type="submit" class="btn btn-primary">Submit</button>
